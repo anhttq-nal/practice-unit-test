@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  app:
+    container_name: order_processing_test
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    networks:
+      - pest_net
+    command: ["composer", "test:coverage"]
+    environment:
+      - XDEBUG_MODE=coverage
+
+networks:
+  pest_net:
+    driver: bridge
